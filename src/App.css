@@ -41,6 +41,12 @@
     color: #888;
 } */
 
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 section {
     display: flex;
     flex-direction: column;
@@ -50,11 +56,31 @@ section {
 
 h1 {
     font-family: Karla;
-    font-weight: 700;
     font-style: Bold;
     font-size: 31.25px;
     line-height: 100%;
     letter-spacing: 0%;
     text-align: center;
     color: #293264;
+}
+
+p {
+    font-family: Karla;
+    font-style: Regular;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+}
+
+button {
+    width: 193px;
+    height: 52px;
+    opacity: 1;
+    border-radius: 15px;
+    background-color: #4d5b9e;
+    color: aliceblue;
+    border-style: none;
+    font-size: 24px;
+    font-style: bold;
 }
