@@ -84,3 +84,7 @@ button {
     font-size: 24px;
     font-style: bold;
 }
+
+.selected {
+    background-color: #d6dbf5;
+}

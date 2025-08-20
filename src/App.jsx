@@ -8,12 +8,11 @@ function App() {
 
     function startQuiz() {
         setStart((prevState) => !prevState);
-        console.log(start);
     }
 
     return (
         <section className="page">
-            {start ? <Home onClick={startQuiz} /> : <Quiz />}
+            {!start ? <Home onClick={startQuiz} /> : <Quiz />}
         </section>
     );
 }
