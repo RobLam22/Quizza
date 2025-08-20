@@ -4,6 +4,7 @@ import { shuffleAnswers } from '../utils/shuffleAnswers';
 
 export function Quiz() {
     const [quizData, setQuizData] = useState([]);
+    const [answers, setAnswers] = useState([]);
 
     useEffect(() => {
         async function apiCall() {
@@ -19,7 +20,11 @@ export function Quiz() {
                         ...result.incorrect_answers,
                     ]),
                 }));
+                const answersArr = data.results.map(
+                    (result) => result.correct_answer
+                );
                 setQuizData(filteredData);
+                setAnswers(answersArr);
             } catch (error) {
                 console.error('ERROR', error);
                 return null;
@@ -28,11 +33,11 @@ export function Quiz() {
         apiCall();
     }, []);
 
-    console.log(quizData);
+    console.log(answers);
 
     const questions = quizData.map((question, index) => (
         <div key={index}>
-            <h1>{decode(question.question)}</h1>
+            <h2>{decode(question.question)}</h2>
             <div className="answers">
                 {question.mixed_answers.map((answer, index) => (
                     <button
@@ -62,7 +67,8 @@ export function Quiz() {
     }
 
     function checkAnswers() {
-        console.log('pinging');
+        const allAnswers = document.querySelectorAll('.selected');
+        console.log(Array.from(allAnswers).map((answer) => answer.value));
     }
 
     return (
