@@ -5,6 +5,8 @@ import { shuffleAnswers } from '../utils/shuffleAnswers';
 export function Quiz() {
     const [quizData, setQuizData] = useState([]);
     const [answers, setAnswers] = useState([]);
+    const [gameEnd, setgameEnd] = useState(false);
+    const [restart, setRestart] = useState(false);
 
     useEffect(() => {
         async function apiCall() {
@@ -31,9 +33,7 @@ export function Quiz() {
             }
         }
         apiCall();
-    }, []);
-
-    console.log(answers);
+    }, [restart]);
 
     const questions = quizData.map((question, index) => (
         <div key={index}>
@@ -67,14 +67,38 @@ export function Quiz() {
     }
 
     function checkAnswers() {
-        const allAnswers = document.querySelectorAll('.selected');
-        console.log(Array.from(allAnswers).map((answer) => answer.value));
+        const selectedBtns = document.querySelectorAll('.selected');
+        const guessedAnswers = Array.from(selectedBtns).map(
+            (answer) => answer.value
+        );
+        selectedBtns.forEach((btn, i) => {
+            btn.classList.remove('selected');
+            btn.classList.add(
+                guessedAnswers[i] === answers[i] ? 'correct' : 'incorrect'
+            );
+        });
+
+        const answerBlocks = Array.from(document.querySelectorAll('.answers'));
+        answerBlocks.forEach((block, i) => {
+            const buttons = block.querySelectorAll('button');
+            buttons.forEach((btn) => {
+                if (btn.classList.contains('correct')) return;
+                if (btn.value === answers[i]) btn.classList.add('right');
+            });
+        });
+
+        setgameEnd((prevgameEnd) => !prevgameEnd);
     }
+
+    console.log(restart);
+    console.log(gameEnd);
 
     return (
         <>
             {questions}
-            <button onClick={checkAnswers}>Check answers</button>
+            <button onClick={checkAnswers}>
+                {gameEnd ? 'Play Again?' : 'Check answers'}
+            </button>
         </>
     );
 }
