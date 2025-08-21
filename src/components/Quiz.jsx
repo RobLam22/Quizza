@@ -8,7 +8,16 @@ export function Quiz() {
     const [gameEnd, setgameEnd] = useState(false);
     const [restart, setRestart] = useState(false);
 
+    console.log(quizData);
+
     useEffect(() => {
+        // cleanup function
+        const allButtons = document.querySelectorAll('button');
+        allButtons.forEach((btn) => {
+            btn.className = '';
+        });
+
+        // api call
         async function apiCall() {
             try {
                 const response = await fetch(
@@ -87,16 +96,19 @@ export function Quiz() {
             });
         });
 
-        setgameEnd((prevgameEnd) => !prevgameEnd);
+        setgameEnd(true);
     }
 
-    console.log(restart);
-    console.log(gameEnd);
+    function restartGame() {
+        console.log('restarting');
+        setRestart((prevRestart) => !prevRestart);
+        setgameEnd(false);
+    }
 
     return (
         <>
             {questions}
-            <button onClick={checkAnswers}>
+            <button onClick={gameEnd ? restartGame : checkAnswers}>
                 {gameEnd ? 'Play Again?' : 'Check answers'}
             </button>
         </>
