@@ -16,6 +16,7 @@ export function Quiz() {
         allButtons.forEach((btn) => {
             btn.className = '';
         });
+        setgameEnd(false);
 
         // api call
         async function apiCall() {
@@ -45,26 +46,28 @@ export function Quiz() {
     }, [restart]);
 
     const questions = quizData.map((question, index) => (
-        <div key={index}>
-            <h2>{decode(question.question)}</h2>
-            <div className="answers">
-                {question.mixed_answers.map((answer, index) => (
-                    <button
-                        key={index}
-                        id={index}
-                        onClick={selectAnswer}
-                        value={answer}
-                    >
-                        {decode(answer)}
-                    </button>
-                ))}
+        <>
+            <div key={index}>
+                <h2>{decode(question.question)}</h2>
+                <div className="answers">
+                    {question.mixed_answers.map((answer, index) => (
+                        <button
+                            key={index}
+                            id={index}
+                            onClick={selectAnswer}
+                            value={answer}
+                        >
+                            {decode(answer)}
+                        </button>
+                    ))}
+                </div>
             </div>
-        </div>
+            <hr />
+        </>
     ));
 
     function selectAnswer(e) {
         const container = e.target.parentElement;
-        const selectedAnswer = e.target.id;
         for (let child of container.children) {
             if (child.id != e.target.id) {
                 child.classList.remove('selected');
@@ -100,14 +103,17 @@ export function Quiz() {
     }
 
     function restartGame() {
-        console.log('restarting');
         setRestart((prevRestart) => !prevRestart);
-        setgameEnd(false);
     }
 
     return (
         <>
             {questions}
+            <p>
+                {gameEnd
+                    ? `You got ${document.querySelectorAll('.correct').length}/5 right`
+                    : `What Do You Know?`}
+            </p>
             <button onClick={gameEnd ? restartGame : checkAnswers}>
                 {gameEnd ? 'Play Again?' : 'Check answers'}
             </button>
