@@ -151,3 +151,9 @@ hr {
     border-top: 1px solid #dbdef0;
     border-bottom: none;
 }
+
+.page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -114,7 +114,10 @@ export function Quiz() {
                     ? `You got ${document.querySelectorAll('.correct').length}/5 right`
                     : `What Do You Know?`}
             </p>
-            <button onClick={gameEnd ? restartGame : checkAnswers}>
+            <button
+                className="reset"
+                onClick={gameEnd ? restartGame : checkAnswers}
+            >
                 {gameEnd ? 'Play Again?' : 'Check answers'}
             </button>
         </>
