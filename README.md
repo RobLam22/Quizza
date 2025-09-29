@@ -1,12 +1,9 @@
-# React + Vite
+# Quizza
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[https://quizzas.netlify.app/]
 
-Currently, two official plugins are available:
+Quizza is a simple quiz app that lets you select alternatives and then gives you a score.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## How to play
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Just click the button to start the game. The Quiz will load with 5 questions for you to select answers for. Check your answers to see how many you guessed correctly. Play over and over.
